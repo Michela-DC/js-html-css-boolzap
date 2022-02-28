@@ -4,12 +4,14 @@
     padding: 0;
 }
 
-
+body{
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
 
 .main-container{
     height: 100vh;
     width: 100%;
-    border: 2px solid black;
     display: flex;
 }
 
@@ -33,13 +35,13 @@ input:focus {
     padding: 10px;
 }
 
-.contact-info{
+.contact-info, .user-info{
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.contact-photo{
+.contact-photo, .user-photo{
     width: 35px;
     height: 35px;
     background-color: white;
@@ -58,38 +60,48 @@ input:focus {
     margin: 10px;
 }
 
+.last-seen{
+    font-size: 14px;
+    color: grey;
+}
+
 /* contacts-section -------------- */
 
 .contacts-section{
-    width: 450px;
-    border: 2px solid blue;
+    width: 400px;
     display: flex;
     flex-direction: column;
+    border-right: 1px solid #B1B1B1;
 }
 
 .contacts-container{
     flex-grow: 1;
-    border: 2px dashed red;
 }
 
 .new-notification{
     background-color: #8EDAFC;
-    height: 58px;
+    height: 60px;
     padding: 0 10px;
     display: flex;
     align-items: center;
     gap: 10px;
+    font-size: 14px;
 }
 
 .fa-bell-slash{
     background-color: white;
     color: #8EDAFC;
-    padding: 10px 8px;
+    padding: 11px 9px;
     border-radius: 50%;
+    font-size: 15px;
+}
+
+.desktop-notification{
+    color: grey;
 }
 
 .searchbar-wrapper{
-    height: 40px;
+    height: 45px;
     background-color: white;
     border-top: 5px solid #f1f1f1;
     border-bottom: 5px solid #f1f1f1;
@@ -116,7 +128,7 @@ input:focus {
 }
 
 .chat-preview{
-    height: 55px;
+    height: 58px;
     width: 100%;
     display: flex;
     align-items: flex-start;
@@ -129,21 +141,21 @@ input:focus {
     border: 1px solid black;
 }
 
-.chat-preview .contact-photo{
-    border: 1px solid black;
-}
-
-.photo-info{
+.preview-wrapper{
     display: flex;
     align-items: flex-start;
     gap: 10px;
+}
+
+.message-preview, .last-message{
+    font-size: 14px;
+    color: grey;
 }
 
 /* chat-section ------------------ */
 
 .chat-section{
     flex-grow: 1;
-    border: 2px dashed yellowgreen;
     display: flex;
     flex-direction: column;
 }
@@ -159,24 +171,37 @@ input:focus {
     width: 100%;
 }
 
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
 .message-text{
     border-radius: 5px;
-    height: 40px;
+    padding: 10px;
+    height: 60px;
     width: 40%;
-    padding: 7px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .sent-text{
     background-color: #D5F9BB;
-    position: relative;
-    left: 60%;
+    float: right;
 }
 
 .received-text{
     background-color: white;
-    position: relative;
-    right: 0;
+    float: left;
 }
+
+.date-time{
+    align-self: flex-end;
+    font-size: 12px;
+    color: grey;
+}
+
 
 .write-container{
     height: 55px;

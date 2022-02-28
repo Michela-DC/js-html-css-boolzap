@@ -6,17 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <title>Boolzap</title>
 </head>
 <body>
 
     <main>
-        <div class="main-container">
+        <div id="app" class="main-container">
 
             <section class="contacts-section">
                 <nav class="navbar-contacts">
-                    <div class="contact-info">
-                        <figure class="contact-photo">
+                    <div class="user-info">
+                        <figure class="user-photo">
                             <i class="fa-regular fa-user"></i>
                         </figure>
                         <div class="contact-name">Name</div>
@@ -34,7 +38,7 @@
                         <i class="fa-solid fa-bell-slash"></i>
                         <div class="receive-desktop">
                             <div class="receive">Ricevi notifiche di uovi utenti</div>
-                            <div class="desktop-not">Attiva notifica desktop</div>
+                            <a href="" class="desktop-notification">Attiva notifica desktop</a>
                         </div>
                     </div>
 
@@ -46,12 +50,12 @@
                     </div>
 
                     <div class="chat-preview">
-                        <div class="photo-info">
+                        <div class="preview-wrapper">
                             <figure class="contact-photo">
                                 <i class="fa-regular fa-user"></i>
                             </figure>
 
-                            <div class="name-preview">
+                            <div class="contact-preview">
                                 <div class="contact-name">Name</div>
                                 <div class="message-preview">
                                     Lorem ipsum dolor sit amet.
@@ -67,6 +71,7 @@
 
             </section> <!-- fine contacts-section -->
     
+            <!-- chat section -->
             <section class="chat-section">
                 <nav class="navbar-chat">
                     <div class="contact-info">
@@ -75,7 +80,7 @@
                         </figure>
                         <div>
                             <div class="contact-name">Name</div>
-                            <div>Ultimo accesso</div>
+                            <div class="last-seen">Ultimo accesso</div>
                         </div>
                     </div>
             
@@ -87,15 +92,21 @@
                 </nav>
 
                 <div class="chat-container">
-                    <div class="message-wrapper">
+                    <div class="message-wrapper sent-wrapper clearfix">
                         <div class="message-text sent-text">
                             Lorem, ipsum dolor.
+                            <div class="date-time">
+                                data e ora
+                            </div>
                         </div>
                     </div>
 
-                    <div class="message-wrapper">
+                    <div class="message-wrapper received-wrapper clearfix">
                         <div class="message-text received-text">
-                            Lorem ipsum dolor sit.
+                            Lorem, ipsum dolor.
+                            <div class="date-time">
+                                data e ora
+                            </div>
                         </div>
                     </div>
                 </div>
