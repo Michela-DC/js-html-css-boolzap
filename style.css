@@ -35,22 +35,23 @@ input:focus {
     padding: 10px;
 }
 
-.contact-info, .user-info{
+.user-info, .contact-info{
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.contact-photo, .user-photo{
+.picture-container{
     width: 35px;
     height: 35px;
-    background-color: white;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+    overflow: hidden;
 }
+
+.profile-picture{
+    width: 100%;
+}
+
 
 .icon-wrapper{
     color: #B1B1B1;
@@ -134,10 +135,6 @@ input:focus {
     align-items: flex-start;
     justify-content: space-between;
     padding: 10px;
-    border: 1px solid black;
-}
-
-.chat-preview .contact-photo{
     border: 1px solid black;
 }
 
