@@ -26,7 +26,7 @@ const app = new Vue ({
             },
             {
                 name: 'Fabio',
-                avatar: 'img/dusan-veverkolog-Hc9G7owDs1s-unsplash.jpg',
+                avatar: 'img/christopher-alvarenga-3osGqRRtQBE-unsplash.jpg',
                 visible: true,
                 messages: [
                     {
@@ -48,7 +48,7 @@ const app = new Vue ({
             },
             {
                 name: 'Samuele',
-                avatar: 'img/adam-berkecz-K6kZKJOmZrk-unsplash.jpg',
+                avatar: 'img/nick-reynolds-8fqL_g50ypc-unsplash.jpg',
                 visible: true,
                 messages: [
                     {

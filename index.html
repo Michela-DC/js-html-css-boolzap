@@ -16,124 +16,144 @@
 </head>
 <body>
 
-    <main>
-        <div id="app" class="main-container">
-            <!-- contacts-section -->
-            <section class="contacts-section">
-                <!-- navbar-contacts -->
-                <nav class="navbar-contacts">
-                    <div class="user-info">
-                        <figure class="picture-container">
-                            <img class="profile-picture" src="img/photo-1547407139-3c921a66005c.jpeg" alt="">
-                        </figure>
-                        <div class="contact-name">Name</div>
-                    </div>
-        
-                    <div class="icon-wrapper">
+    <div id="app" class="main-container">
+        <!-- contacts-section -->
+        <section class="contacts-section">
+            <!-- toolbar-contacts -->
+            <div class="toolbar toolbar-contacts">
+                <div class="user-info">
+                    <figure class="picture-smaller">
+                        <img class="profile-picture" src="img/photo-1547407139-3c921a66005c.jpeg" alt="">
+                    </figure>
+                    <div class="contact-name">Name</div>
+                </div>
+    
+                <ul class="icon-container">
+                    <li>
                         <i class="fa-regular fa-circle"></i>
+                    </li>
+                    <li>
                         <i class="fa-solid fa-message"></i>
+                    </li>
+                    <li>
                         <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </div>
-                </nav>
-                <!-- contacts-container -->
-                <div class="contacts-container">
-                    <div class="new-notification">
-                        <i class="fa-solid fa-bell-slash"></i>
+                    </li>
+                </ul>
+            </div>
+            <!-- contacts-container -->
+            <div class="contacts-container">
+                <div class="new-notification">
+                    <i class="fa-solid fa-bell-slash"></i>
 
-                        <div class="receive-desktop">
-                            <div class="receive">Ricevi notifiche di nuovi utenti</div>
-                            <a href="" class="desktop-notification">Attiva notifiche desktop</a>
-                        </div>
+                    <div class="receive-desktop">
+                        <div class="receive">Ricevi notifiche di nuovi utenti</div>
+                        <a href="" class="desktop-notification">Attiva notifiche desktop</a>
                     </div>
+                </div>
 
+                <div class="searchbar-container">
                     <div class="searchbar-wrapper">
                         <button class="btn-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                         <input type="text" placeholder="Cerca o inizia una nuova chat" class="search-input">
                     </div>
+                </div>
 
-                    <div class="chat-preview" v-for="(contact, i) in contacts">
-                        <div class="preview-wrapper">
-                            <figure class="picture-container">
-                                <img class="profile-picture" :src="contact.avatar" alt="">
-                            </figure>
-
-                            <div class="contact-preview">
-                                <div class="contact-name">
-                                    {{contact.name}}
-                                </div>
-
-                                <!-- prima ho ciclato dentro contacts usando come elemento corrente di riferimento contact poi, per estrarre text da messages, 
-                                devo ciclare prendendo l'elemento contact e dicendogli di accedere dentro a messages quindi contact.message
-                                e mi creo un nuovo elemento di riferimento (message) -->
-                                <div class="message-preview" v-for="(message, i) in contact.messages.slice(0,1)">
-                                    <!-- .slice extracts up to but not including end, for example: slice(1,4) extracts the second element through the fourth element (elements indexed 1, 2, and 3) --> 
-                                    {{message.text}}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="last-message">
-                            date e ora
-                        </div>
-                    </div>
-
-                </div><!-- fine contacts-container -->
-
-            </section> <!-- fine contacts-section -->
-    
-            <!-- chat section -->
-            <section class="chat-section">
-                <!-- navbar-chat -->
-                <nav class="navbar-chat">
-                    <div class="contact-info">
+                
+                <div class="chat-preview" v-for="(contact, i) in contacts">
+                    <div class="picture-wrapper">
                         <figure class="picture-container">
-                            <img class="profile-picture" src="https://picsum.photos/200/300" alt="">
+                            <img class="profile-picture" :src="contact.avatar" alt="">
                         </figure>
-                        <div>
-                            <div class="contact-name">Name</div>
-                            <div class="last-seen">Ultimo accesso</div>
-                        </div>
                     </div>
-            
-                    <div class="icon-wrapper">
+
+                    <!-- prima ho ciclato dentro contacts usando come elemento corrente di riferimento contact poi, per estrarre text da messages, 
+                    devo ciclare prendendo l'elemento contact e dicendogli di accedere dentro a messages quindi contact.message
+                    e mi creo un nuovo elemento di riferimento (message) -->
+                    <div class="preview-wrapper" v-for="(message, i) in contact.messages.slice(0,1)">
+                        <div class="contact-preview">
+                            <div class="contact-name">
+                                {{contact.name}}
+                            </div>
+                            <div class="message-preview">
+                                <!-- .slice extracts up to but not including end, for example: slice(1,4) extracts the second element through the fourth element (elements indexed 1, 2, and 3) --> 
+                                {{message.text}}
+                            </div>
+                        </div>
+                        <div class="last-message">  
+                            {{message.date}}
+                        </div>
+                        
+                    </div>
+                </div> <!-- fine chat-preview -->
+
+            </div><!-- fine contacts-container -->
+
+        </section> <!-- fine contacts-section -->
+
+        <!-- chat section -->
+        <section class="chat-section">
+            <!-- toolbar-chat -->
+            <div class="toolbar toolbar-chat">
+                <div class="contact-info">
+                    <figure class="picture-smaller">
+                        <img class="profile-picture" src="https://picsum.photos/200/300" alt="">
+                    </figure>
+                    <div>
+                        <div class="contact-name">Name</div>
+                        <div class="last-seen">Ultimo accesso</div>
+                    </div>
+                </div>
+        
+                <ul class="icon-container">
+                    <li>
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <i class="fa-solid fa-paperclip"></i>
+                    </li>
+                    <l>
+                        <i class="fa-solid fa-phone"></i>
+                    </l>
+                    <l>
+                        <i class="fa-solid fa-video"></i>
+                    </l>
+                    <l>
                         <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </div>
-                </nav>
+                    </l>
+                </ul>
+            </div>
 
-                <!-- chat-container -->
-                <div class="chat-container">
-                    <div class="message-wrapper sent-wrapper clearfix">
-                        <div class="message-text sent-text">
-                            Lorem, ipsum dolor.
-                            <div class="date-time">
-                                data e ora
-                            </div>
-                        </div>
+            <!-- chat-container -->
+            <div class="chat-container">
+                <div class="message sent">
+                    <div class="text">
+                        Lorem, ipsum dolor.
                     </div>
-
-                    <div class="message-wrapper received-wrapper clearfix">
-                        <div class="message-text received-text">
-                            Lorem, ipsum dolor.
-                            <div class="date-time">
-                                data e ora
-                            </div>
-                        </div>
+                    <div class="date-time">
+                        data e ora
                     </div>
                 </div>
 
-                <div class="write-container">
-                    <i class="fa-regular fa-face-smile"></i>
-                    <input type="text" placeholder="Scrivi un messaggio" class="write-input">
-                    <i class="fa-solid fa-microphone"></i>
+                <div class="message received">
+                    <div class="text">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio labore neque hic laborum voluptatum culpa error iste, voluptates, totam fugit esse nulla harum eveniet est eius ab, numquam iure illum!
+                        Exercitationem sint voluptates, eaque doloribus modi explicabo harum odit fuga, nemo doloremque laboriosam accusamus dicta similique nam error. Animi, culpa! Dolorum reprehenderit temporibus voluptatem eveniet eligendi quo cupiditate explicabo necessitatibus.
+                        Accusantium incidunt quisquam dicta laudantium illo doloremque sed porro, iste expedita error culpa modi consequatur illum debitis quas possimus repellat atque ipsum ratione optio recusandae! Dolor enim laboriosam quia velit.
+                    </div>
+                    <div class="date-time">
+                        data e ora
+                    </div>
                 </div>
-            </section>
+            </div>
 
-        </div>
-    </main>
+            <div class="write-container">
+                <i class="fa-regular fa-face-smile"></i>
+                <i class="fa-solid fa-paperclip"></i>
+                <input type="text" placeholder="Scrivi un messaggio" class="write-input">
+                <i class="fa-solid fa-microphone"></i>
+            </div>
+        </section>
+
+    </div>
 
     <script src="script.js"></script>
 </body>

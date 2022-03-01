@@ -20,15 +20,26 @@ input:focus {
 } /*per togliere il bordo allínput quando ci vado dentro per scrivere*/
 
 ::placeholder{
-    color: grey;
+    color: var(--grey-text);
 }
 
-/* Navbars ------------------------------ */
+ul li{
+    list-style: none;
+}
 
-.navbar-contacts, .navbar-chat{
+:root{
+    --bg-ligthGrey: #EFF2F5;
+    --icon-color: #53646F;
+    --border-lightGrey: #D3D3D3;
+    --grey-text: #808080;
+}
+
+/* Toolbars ------------------------------ */
+
+.toolbar{
     height: 55px;
     width: 100%;
-    background-color: #EAEAEA;
+    background-color: var(--bg-ligthGrey);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -41,9 +52,9 @@ input:focus {
     gap: 10px;
 }
 
-.picture-container{
-    width: 35px;
-    height: 35px;
+.picture-smaller{
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     overflow: hidden;
 }
@@ -52,27 +63,27 @@ input:focus {
     width: 100%;
 }
 
-
-.icon-wrapper{
-    color: #B1B1B1;
-}
-
-.icon-wrapper i:nth-child(2){
-    margin: 10px;
+.icon-container{
+    color: var(--icon-color);
+    display: flex;
+    gap: 20px;
+    padding-right: 20px;
+    cursor: pointer;
 }
 
 .last-seen{
     font-size: 14px;
-    color: grey;
+    color: var(--grey-text);
 }
 
 /* contacts-section -------------- */
 
 .contacts-section{
-    width: 400px;
+    width: 30%;
+    min-width: 350px;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid #B1B1B1;
+    border-right: 1px solid lightgray;
 }
 
 .contacts-container{
@@ -98,27 +109,30 @@ input:focus {
 }
 
 .desktop-notification{
-    color: grey;
+    color: var(--grey-text);
+}
+
+.searchbar-container{
+    background-color: white;
+    padding: 8px 14px;
+    height: 55px;
 }
 
 .searchbar-wrapper{
-    height: 45px;
-    background-color: white;
-    border-top: 5px solid #f1f1f1;
-    border-bottom: 5px solid #f1f1f1;
-    border-right: 8px solid #f1f1f1;
-    border-left: 8px solid #f1f1f1;
-    border-radius: 5px;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
     display: flex;
     align-items: center;
 }
 
 .btn-search{
+    height: 100%;
     padding-left: 10px;
-    background-color: white;
+    background-color: var(--bg-ligthGrey);
     border: none;
     font-size: 16px;
-    color: #B1B1B1;
+    color: var(--icon-color);
 }
 
 .search-input{
@@ -126,27 +140,44 @@ input:focus {
     height: 100%;
     border: none;
     padding: 15px;
+    background-color: var(--bg-ligthGrey);
 }
 
 .chat-preview{
     height: 58px;
     width: 100%;
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 10px;
-    border: 1px solid black;
+    align-items: center;
+    gap: 10px;
+    padding: 0 10px;
 }
 
 .preview-wrapper{
     display: flex;
-    align-items: flex-start;
-    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding-right: 10px;
+    border-bottom: 1px solid var(--border-lightGrey);
 }
 
-.message-preview, .last-message{
+.message-preview{
     font-size: 14px;
-    color: grey;
+    color: var(--grey-text);
+    /* per avere i 3 puntini quando il testo é troop lungo: */
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 200px;
+    height: 1.2em;
+    white-space: nowrap;
+}
+
+.last-message{
+    font-size: 12px;
+    color: var(--grey-text);
+    align-self: flex-start;
+    padding-top: 15px;
 }
 
 /* chat-section ------------------ */
@@ -158,54 +189,67 @@ input:focus {
 }
 
 .chat-container{
-    background-color: #E5DDD5;
+    background-image: url('img/whatsapp-bg-default.png');
+    /* background-color: #E5DDD5; */
     flex-grow: 1;
     width: 100%;
-    padding: 30px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
-.message-wrapper{
-    width: 100%;
+.picture-container{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid red;
 }
 
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.message-text{
+.message{
     border-radius: 5px;
-    padding: 10px;
-    height: 60px;
-    width: 40%;
+    padding: 12px;
+    max-width: 70%;
+    /* con la max-width non potrá essere piú grande di un tot */
     display: flex;
     justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 2px 3px #aaa;
 }
 
-.sent-text{
+/* element+element -> esempio div + p = Selects the first <p> element that is placed immediately after <div> elements */
+.sent + .received{
+    margin-top: 20px;
+}
+
+.sent{
     background-color: #D5F9BB;
-    float: right;
+    align-self: flex-end;
+    /* dandogli l'align self il div si adatterá al suo contenuto altrimenti prendeva la max-width */
 }
 
-.received-text{
+.received{
     background-color: white;
-    float: left;
+    align-self: flex-start;
+}
+
+.text{
+    padding-bottom: 12px;
 }
 
 .date-time{
     align-self: flex-end;
     font-size: 12px;
-    color: grey;
+    color: var(--grey-text);
 }
-
 
 .write-container{
     height: 55px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    background-color: #EAEAEA;
+    background-color: var(--bg-ligthGrey);
 }
 
 .write-input{
@@ -218,5 +262,5 @@ input:focus {
 
 .write-container i{
     font-size: 16px;
-    color: grey;
+    color: var(--icon-color);
 }
