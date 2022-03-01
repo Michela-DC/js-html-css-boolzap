@@ -56,12 +56,12 @@
                         <button class="btn-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
-                        <input type="text" placeholder="Cerca o inizia una nuova chat" class="search-input">
+                        <input type="text" placeholder="Cerca o inizia una nuova chat" class="search-input" v-model="searched">
                     </div>
                 </div>
 
                 
-                <div class="chat-preview" v-for="(contact, i) in contacts">
+                <div class="chat-preview" v-for="(contact, i) in contacts" @click="getChat(i)">
                     <div class="picture-wrapper">
                         <figure class="picture-container">
                             <img class="profile-picture" :src="contact.avatar" alt="">
@@ -72,12 +72,12 @@
                     devo ciclare prendendo l'elemento contact e dicendogli di accedere dentro a messages quindi contact.message
                     e mi creo un nuovo elemento di riferimento (message) -->
                     <div class="preview-wrapper" v-for="(message, i) in contact.messages.slice(0,1)">
+                        <!-- .slice extracts up to but not including end, for example: slice(1,4) extracts the second element through the fourth element (elements indexed 1, 2, and 3) --> 
                         <div class="contact-preview">
                             <div class="contact-name">
                                 {{contact.name}}
                             </div>
                             <div class="message-preview">
-                                <!-- .slice extracts up to but not including end, for example: slice(1,4) extracts the second element through the fourth element (elements indexed 1, 2, and 3) --> 
                                 {{message.text}}
                             </div>
                         </div>
@@ -110,45 +110,46 @@
                     <li>
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </li>
-                    <l>
+                    <li>
                         <i class="fa-solid fa-phone"></i>
-                    </l>
-                    <l>
+                    </li>
+                    <li>
                         <i class="fa-solid fa-video"></i>
-                    </l>
-                    <l>
+                    </li>
+                    <li>
                         <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </l>
+                    </li>
                 </ul>
             </div>
 
             <!-- chat-container -->
             <div class="chat-container">
-                <div class="message sent">
-                    <div class="text">
-                        Lorem, ipsum dolor.
+                <div class="chat-wrapper" v-for="(contact, i) in contacts">
+                    <div class="message sent">
+                        <div class="text">
+                            Lorem ipsum dolor sit amet.
+                        </div>
+                        <div class="date-time">
+                            data e ora
+                        </div>
                     </div>
-                    <div class="date-time">
-                        data e ora
+                    
+                    <div class="message received" v-for="(message, i) in contact.messages">
+                        <div class="text" >
+                            {{message.text}}
+                        </div>
+                        <div class="date-time">
+                            {{message.date}}
+                        </div>
                     </div>
                 </div>
-
-                <div class="message received">
-                    <div class="text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio labore neque hic laborum voluptatum culpa error iste, voluptates, totam fugit esse nulla harum eveniet est eius ab, numquam iure illum!
-                        Exercitationem sint voluptates, eaque doloribus modi explicabo harum odit fuga, nemo doloremque laboriosam accusamus dicta similique nam error. Animi, culpa! Dolorum reprehenderit temporibus voluptatem eveniet eligendi quo cupiditate explicabo necessitatibus.
-                        Accusantium incidunt quisquam dicta laudantium illo doloremque sed porro, iste expedita error culpa modi consequatur illum debitis quas possimus repellat atque ipsum ratione optio recusandae! Dolor enim laboriosam quia velit.
-                    </div>
-                    <div class="date-time">
-                        data e ora
-                    </div>
-                </div>
+                
             </div>
-
+            
             <div class="write-container">
                 <i class="fa-regular fa-face-smile"></i>
                 <i class="fa-solid fa-paperclip"></i>
-                <input type="text" placeholder="Scrivi un messaggio" class="write-input">
+                <input type="text" placeholder="Scrivi un messaggio" class="write-input" v-model="newMessage" @keyup.enter="sendMessage()">
                 <i class="fa-solid fa-microphone"></i>
             </div>
         </section>

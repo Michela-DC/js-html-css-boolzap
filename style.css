@@ -30,7 +30,7 @@ ul li{
 :root{
     --bg-ligthGrey: #EFF2F5;
     --icon-color: #53646F;
-    --border-lightGrey: #D3D3D3;
+    --border-color: #DCDCDC;
     --grey-text: #808080;
 }
 
@@ -53,8 +53,8 @@ ul li{
 }
 
 .picture-smaller{
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     overflow: hidden;
 }
@@ -83,7 +83,7 @@ ul li{
     min-width: 350px;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid lightgray;
+    border-right: 1px solid var(--border-color);
 }
 
 .contacts-container{
@@ -116,6 +116,18 @@ ul li{
     background-color: white;
     padding: 8px 14px;
     height: 55px;
+    position: relative;
+}
+
+.searchbar-container::after{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: var(--border-color);
+    left: 0;
+    bottom: 0;
 }
 
 .searchbar-wrapper{
@@ -144,11 +156,11 @@ ul li{
 }
 
 .chat-preview{
-    height: 58px;
+    height: 65px;
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     padding: 0 10px;
 }
 
@@ -159,7 +171,7 @@ ul li{
     width: 100%;
     height: 100%;
     padding-right: 10px;
-    border-bottom: 1px solid var(--border-lightGrey);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .message-preview{
@@ -189,9 +201,13 @@ ul li{
 }
 
 .chat-container{
+    overflow-y: scroll;
+    flex-grow: 1;
+}
+
+.chat-wrapper{
     background-image: url('img/whatsapp-bg-default.png');
     /* background-color: #E5DDD5; */
-    flex-grow: 1;
     width: 100%;
     padding: 40px;
     display: flex;
@@ -204,7 +220,6 @@ ul li{
     height: 45px;
     border-radius: 50%;
     overflow: hidden;
-    border: 1px solid red;
 }
 
 .message{
@@ -215,18 +230,38 @@ ul li{
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    box-shadow: 0 2px 3px #aaa;
+    /* invece di box-shadow: 0 2px 3px #aaa; uso fliter: drop-shadow cosí l'ombra va anche sul triangolino*/
+    filter: drop-shadow(0px 2px 2px #aaa);
+    position: relative;
+    border-top-right-radius: 0;
 }
 
 /* element+element -> esempio div + p = Selects the first <p> element that is placed immediately after <div> elements */
-.sent + .received{
+.sent + .received,
+.received + .sent{
     margin-top: 20px;
 }
 
 .sent{
     background-color: #D5F9BB;
-    align-self: flex-end;
-    /* dandogli l'align self il div si adatterá al suo contenuto altrimenti prendeva la max-width */
+    align-self: flex-end; /* dandogli l'align self il div si adatterá al suo contenuto altrimenti prendeva la max-width */
+    position: relative;
+}
+
+.sent::before{
+    content: '';
+    display: none;
+    position: absolute;
+    border: 6px solid #D5F9BB;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    top: 0;
+    left: 100%;
+}
+
+.sent:first-child::before,
+.received + .sent::before{
+    display: block;
 }
 
 .received{
@@ -245,7 +280,7 @@ ul li{
 }
 
 .write-container{
-    height: 55px;
+    min-height: 55px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -256,7 +291,7 @@ ul li{
     width: 80%;
     border: none;
     height: 35px;
-    padding: 15px;
+    padding: 0 15px;
     border-radius: 5px;
 }
 
