@@ -1,6 +1,10 @@
 const app = new Vue ({
     el: '#app',
     data: {
+        searched: '',
+        newText: '',
+        activeContact: null,  // ci memorizzo contatto attivo
+        activeIndex: 0,
         contacts: [
             {
                 name: 'Michele',
@@ -85,6 +89,56 @@ const app = new Vue ({
                     }
                 ],
             },
-        ]
+        ],
     },
+
+    methods: {
+        selectContact: function (contact) {
+            this.activeContact = contact;
+            console.log(this.activeContact);
+        }, 
+
+        getHour: function ( date ) {
+            const hour = date.split(' ')[1]; //con split prendo l'elemento con posizione 1 dentro a date
+            // The split() method divides a String into an ordered list of substrings, puts these substrings into an array, and returns the array.
+            
+            return hour.substring(0,5);
+            // The substring() method returns the part of the string between the start and end indexes, or to the end of the string.
+            //in questo modo riesco a escludere i secondi dalla stringa
+        },
+        
+        sendMessage: function() {
+            //creo una nuova data usando il costrutto js Date() --> Creates a JavaScript Date instance that represents a single moment in time in a platform-independent format.Date objects contain a Number that represents milliseconds since 1 January 1970 UTC.
+            const newDate = new Date();
+
+            if(this.newText){ //è la stessa cosa di scrivere this.newText !== ''
+                console.log('la stringa non è vuota')
+
+                // nell'array di oggetti contact devo aggiungere un nuovo oggetto che come proprietà ha:
+                let newMessage = {
+                    text: this.newText,
+                    status: 'sent',
+                    date: `${newDate.getDate()}/${newDate.getMonth()+1}/${newDate.getFullYear()} ${newDate.getHours()}:${newDate.getMinutes()}:${newDate.getSeconds()}`,
+                    // getMonth inizia a contare i mesi da zero quindi gli devo aggiungere + 1 per vedere stampato il mese corretto
+                }
+                console.log(newMessage)
+
+                // il nuovo messaggio lo devo pushare dentro contatto attivo che è un array di oggetti
+                this.activeContact.messages.push(newMessage);
+                console.log(this.activeContact);
+
+                //resetto línput della chat
+                this.newText = '';
+
+            }else{
+                console.log('la stringa è vuota');
+            }
+        },
+    },
+
+    // prima che l'applicativo venga montato prendo uno degli hook per imposare il prima contatto attivo
+    created() {
+        this.selectContact(this.contacts[0]);
+        // in questo modo il primo elemento active nella contact sections é Michele
+    }
 })

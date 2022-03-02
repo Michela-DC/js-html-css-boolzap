@@ -201,11 +201,8 @@ ul li{
 }
 
 .chat-container{
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     flex-grow: 1;
-}
-
-.chat-wrapper{
     background-image: url('img/whatsapp-bg-default.png');
     /* background-color: #E5DDD5; */
     width: 100%;
@@ -233,7 +230,6 @@ ul li{
     /* invece di box-shadow: 0 2px 3px #aaa; uso fliter: drop-shadow cosí l'ombra va anche sul triangolino*/
     filter: drop-shadow(0px 2px 2px #aaa);
     position: relative;
-    border-top-right-radius: 0;
 }
 
 /* element+element -> esempio div + p = Selects the first <p> element that is placed immediately after <div> elements */
@@ -246,6 +242,7 @@ ul li{
     background-color: #D5F9BB;
     align-self: flex-end; /* dandogli l'align self il div si adatterá al suo contenuto altrimenti prendeva la max-width */
     position: relative;
+    border-top-right-radius: 0;
 }
 
 .sent::before{
@@ -260,13 +257,28 @@ ul li{
 }
 
 .sent:first-child::before,
-.received + .sent::before{
+.received + .sent::before,
+.received:first-child::before,
+.sent + .received::before{
     display: block;
 }
 
 .received{
     background-color: white;
     align-self: flex-start;
+    position: relative;
+    border-top-left-radius: 0;
+}
+
+.received::before{
+    content: '';
+    display: none;
+    position: absolute;
+    border: 6px solid white;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    top: 0;
+    right: 100%;
 }
 
 .text{
@@ -298,4 +310,10 @@ ul li{
 .write-container i{
     font-size: 16px;
     color: var(--icon-color);
+}
+
+/* -------- */
+
+.active{
+    background-color: var(--bg-ligthGrey);
 }

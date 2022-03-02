@@ -27,7 +27,7 @@
                     </figure>
                     <div class="contact-name">Name</div>
                 </div>
-    
+
                 <ul class="icon-container">
                     <li>
                         <i class="fa-regular fa-circle"></i>
@@ -40,13 +40,13 @@
                     </li>
                 </ul>
             </div>
-            <!-- contacts-container -->
+            <!-- contacts-container ---------------------------->
             <div class="contacts-container">
                 <div class="new-notification">
                     <i class="fa-solid fa-bell-slash"></i>
 
                     <div class="receive-desktop">
-                        <div class="receive">Ricevi notifiche di nuovi utenti</div>
+                        <div class="receive">Ricevi notifiche di nuovi messaggi</div>
                         <a href="" class="desktop-notification">Attiva notifiche desktop</a>
                     </div>
                 </div>
@@ -60,52 +60,58 @@
                     </div>
                 </div>
 
-                
-                <div class="chat-preview" v-for="(contact, i) in contacts" @click="getChat(i)">
+                <!-- chat preview -->
+                <div class="chat-preview" v-for="(contact, i) in contacts" @click="selectContact(contact)" :class="activeContact === contact ? 'active' : '' ">
+                 <!-- contact attivo viene aelezionato con il click che con la funzione rende this.activeContact = contact;
+                poi gli dico che se activeContact corrisponde a contact che é l'elemento corrente allora assegno la classe active -->
                     <div class="picture-wrapper">
                         <figure class="picture-container">
                             <img class="profile-picture" :src="contact.avatar" alt="">
                         </figure>
                     </div>
 
-                    <!-- prima ho ciclato dentro contacts usando come elemento corrente di riferimento contact poi, per estrarre text da messages, 
-                    devo ciclare prendendo l'elemento contact e dicendogli di accedere dentro a messages quindi contact.message
-                    e mi creo un nuovo elemento di riferimento (message) -->
-                    <div class="preview-wrapper" v-for="(message, i) in contact.messages.slice(0,1)">
-                        <!-- .slice extracts up to but not including end, for example: slice(1,4) extracts the second element through the fourth element (elements indexed 1, 2, and 3) --> 
+                    <div class="preview-wrapper">
+                        <!-- v-for="(message, j) in contact.messages" DA RIPROVARE -->
                         <div class="contact-preview">
                             <div class="contact-name">
                                 {{contact.name}}
                             </div>
                             <div class="message-preview">
-                                {{message.text}}
+                                <!-- {{message.text}} -->
+                                DEVE ESSERCI IL PRIMO MESSAGGIO DEL CONTATTO ATTIVO
                             </div>
                         </div>
-                        <div class="last-message">  
-                            {{message.date}}
+                        <div class="last-message">
+                            <!-- {{message.date}} -->
+                            <!-- DEVE ESSERCI LA DATA DELl'ultimo MESSAGGIO DEL CONTATTO ATTIVO -->
+                            DATA 
                         </div>
-                        
                     </div>
+                    
                 </div> <!-- fine chat-preview -->
-
             </div><!-- fine contacts-container -->
 
         </section> <!-- fine contacts-section -->
 
-        <!-- chat section -->
+        <!-- chat section ---------------------------->
         <section class="chat-section">
             <!-- toolbar-chat -->
             <div class="toolbar toolbar-chat">
                 <div class="contact-info">
                     <figure class="picture-smaller">
-                        <img class="profile-picture" src="https://picsum.photos/200/300" alt="">
+                        <img class="profile-picture" :src="activeContact.avatar" alt="">
                     </figure>
                     <div>
-                        <div class="contact-name">Name</div>
-                        <div class="last-seen">Ultimo accesso</div>
+                        <div class="contact-name">
+                            <!-- prendo il nome dell'elemento attivo che ho selezionato con il click -->
+                            {{activeContact.name}}
+                        </div>
+                        <div class="last-seen">
+                            Ultimo accesso
+                        </div>
                     </div>
                 </div>
-        
+
                 <ul class="icon-container">
                     <li>
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -122,36 +128,25 @@
                 </ul>
             </div>
 
-            <!-- chat-container -->
             <div class="chat-container">
-                <div class="chat-wrapper" v-for="(contact, i) in contacts">
-                    <div class="message sent">
-                        <div class="text">
-                            Lorem ipsum dolor sit amet.
-                        </div>
-                        <div class="date-time">
-                            data e ora
-                        </div>
+                <!-- devo prendere i messagi dentro al contatto attivo  -->
+                <div class="message" v-for="message in activeContact.messages" :class="message.status">
+                    <div class="text" >
+                        {{message.text}}
                     </div>
-                    
-                    <div class="message received" v-for="(message, i) in contact.messages">
-                        <div class="text" >
-                            {{message.text}}
-                        </div>
-                        <div class="date-time">
-                            {{message.date}}
-                        </div>
+                    <div class="date-time">
+                        {{getHour(message.date)}}
                     </div>
                 </div>
-                
             </div>
-            
+
             <div class="write-container">
                 <i class="fa-regular fa-face-smile"></i>
                 <i class="fa-solid fa-paperclip"></i>
-                <input type="text" placeholder="Scrivi un messaggio" class="write-input" v-model="newMessage" @keyup.enter="sendMessage()">
+                <input type="text" placeholder="Scrivi un messaggio" class="write-input" v-model="newText" @keyup.enter="sendMessage()">
                 <i class="fa-solid fa-microphone"></i>
             </div>
+
         </section>
 
     </div>
