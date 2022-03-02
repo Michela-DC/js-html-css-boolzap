@@ -106,34 +106,53 @@ const app = new Vue ({
             // The substring() method returns the part of the string between the start and end indexes, or to the end of the string.
             //in questo modo riesco a escludere i secondi dalla stringa
         },
-        
-        sendMessage: function() {
+
+        createMessage: function(text, status) {
             //creo una nuova data usando il costrutto js Date() --> Creates a JavaScript Date instance that represents a single moment in time in a platform-independent format.Date objects contain a Number that represents milliseconds since 1 January 1970 UTC.
             const newDate = new Date();
 
+            // nell'array di oggetti contact devo aggiungere un nuovo oggetto che come proprietà ha:
+            let newMessage = {
+                text,
+                status,
+                date: `${newDate.getDate()}/${newDate.getMonth()+1}/${newDate.getFullYear()} ${newDate.getHours()}:${newDate.getMinutes()}:${newDate.getSeconds()}`,
+                // getMonth inizia a contare i mesi da zero quindi gli devo aggiungere + 1 per vedere stampato il mese corretto
+            }
+            return newMessage;
+        },
+        
+        sendMessage: function() {
+            
             if(this.newText){ //è la stessa cosa di scrivere this.newText !== ''
                 console.log('la stringa non è vuota')
-
-                // nell'array di oggetti contact devo aggiungere un nuovo oggetto che come proprietà ha:
-                let newMessage = {
-                    text: this.newText,
-                    status: 'sent',
-                    date: `${newDate.getDate()}/${newDate.getMonth()+1}/${newDate.getFullYear()} ${newDate.getHours()}:${newDate.getMinutes()}:${newDate.getSeconds()}`,
-                    // getMonth inizia a contare i mesi da zero quindi gli devo aggiungere + 1 per vedere stampato il mese corretto
-                }
-                console.log(newMessage)
+                // per creare il nuovo messaggio richiamo la funzione createMessage e gli passo sent e this.newText come parametri
+                let message = this.createMessage(this.newText, 'sent');
+                console.log(message);
 
                 // il nuovo messaggio lo devo pushare dentro contatto attivo che è un array di oggetti
-                this.activeContact.messages.push(newMessage);
+                this.activeContact.messages.push(message);
                 console.log(this.activeContact);
 
-                //resetto línput della chat
+                //resetto l'input della chat
                 this.newText = '';
+
+                //dopo 1 secondo deve comparire la risposta quindi uso il setTimeout passsandogli come parametri la funzione che crea la risposta e il tempo dopo quanto deve attivarsi
+                setTimeout(this.replyMessage,1000);
 
             }else{
                 console.log('la stringa è vuota');
             }
         },
+
+        replyMessage: function() {
+
+            let reply = this.createMessage('Ok', 'received');
+            console.log(reply);
+
+            this.activeContact.messages.push(reply);
+            console.log(this.activeContact);
+        }
+
     },
 
     // prima che l'applicativo venga montato prendo uno degli hook per imposare il prima contatto attivo
