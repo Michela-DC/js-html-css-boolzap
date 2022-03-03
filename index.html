@@ -56,12 +56,12 @@
                         <button class="btn-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
-                        <input type="text" placeholder="Cerca o inizia una nuova chat" class="search-input" v-model="searched">
+                        <input type="text" placeholder="Cerca o inizia una nuova chat" class="search-input" v-model="searchText">
                     </div>
                 </div>
 
                 <!-- chat preview -->
-                <div class="chat-preview" v-for="(contact, i) in contacts" @click="selectContact(contact)" :class="activeContact === contact ? 'active' : '' ">
+                <div class="chat-preview" v-for="(contact, i) in contacts" @click="selectContact(contact,i)" :class="activeContact === contact ? 'active' : '' ">
                  <!-- contact attivo viene aelezionato con il click che con la funzione rende this.activeContact = contact;
                 poi gli dico che se activeContact corrisponde a contact che é l'elemento corrente allora assegno la classe active -->
                     <div class="picture-wrapper">
@@ -70,21 +70,17 @@
                         </figure>
                     </div>
 
-                    <div class="preview-wrapper">
-                        <!-- v-for="(message, j) in contact.messages" DA RIPROVARE -->
+                    <div class="preview-wrapper" v-for="(message, j) in contact.messages.slice(-1)">
                         <div class="contact-preview">
                             <div class="contact-name">
                                 {{contact.name}}
                             </div>
                             <div class="message-preview">
-                                <!-- {{message.text}} -->
-                                DEVE ESSERCI IL PRIMO MESSAGGIO DEL CONTATTO ATTIVO
+                                {{message.text}}
                             </div>
                         </div>
-                        <div class="last-message">
-                            <!-- {{message.date}} -->
-                            <!-- DEVE ESSERCI LA DATA DELl'ultimo MESSAGGIO DEL CONTATTO ATTIVO -->
-                            DATA 
+                        <div class="last-sent">
+                            {{getHour(message.date)}}
                         </div>
                     </div>
                     
@@ -107,7 +103,7 @@
                             {{activeContact.name}}
                         </div>
                         <div class="last-seen">
-                            Ultimo accesso
+                            last seen {{getDate(lastSeen.date)}} {{getHour(lastSeen.date)}}
                         </div>
                     </div>
                 </div>

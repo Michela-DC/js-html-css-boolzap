@@ -4,14 +4,17 @@ const app = new Vue ({
         searched: '',
         newText: '',
         activeContact: null,  // ci memorizzo contatto attivo
-        activeIndex: 0,
+        searchText: '',
+
+        active: 0,
+
         contacts: [
             {
                 name: 'Michele',
                 avatar: 'img/taya-dianna-elMQ400zvpc-unsplash.jpg',
                 visible: true,
                 messages: [
-                    {   
+                    {
                         date: '10/01/2020 15:30:55',
                         text: 'Hai portato a spasso il cane?',
                         status: 'sent'
@@ -93,18 +96,23 @@ const app = new Vue ({
     },
 
     methods: {
-        selectContact: function (contact) {
+        selectContact: function (contact,index) {
+            this.active = index;
             this.activeContact = contact;
-            console.log(this.activeContact);
-        }, 
+            console.log(this.activeContact,this.active);
+        },
 
         getHour: function ( date ) {
             const hour = date.split(' ')[1]; //con split prendo l'elemento con posizione 1 dentro a date
             // The split() method divides a String into an ordered list of substrings, puts these substrings into an array, and returns the array.
-            
+
             return hour.substring(0,5);
             // The substring() method returns the part of the string between the start and end indexes, or to the end of the string.
             //in questo modo riesco a escludere i secondi dalla stringa
+        },
+
+        getDate: function (date) {
+            return date.split(' ')[0]; 
         },
 
         createMessage: function(text, status) {
@@ -120,9 +128,9 @@ const app = new Vue ({
             }
             return newMessage;
         },
-        
+
         sendMessage: function() {
-            
+
             if(this.newText){ //è la stessa cosa di scrivere this.newText !== ''
                 console.log('la stringa non è vuota')
                 // per creare il nuovo messaggio richiamo la funzione createMessage e gli passo sent e this.newText come parametri
@@ -151,13 +159,22 @@ const app = new Vue ({
 
             this.activeContact.messages.push(reply);
             console.log(this.activeContact);
-        }
+        },
 
+    },
+
+    computed: {
+        lastSeen: function () {
+            return this.activeContact.messages.slice(-1)[0];
+            // If beginIndex is negative, slice() begins extraction from str.length + beginIndex.
+            // con slice(-1) mi ritorna un array con dentro solo l'ultimo elemento dell'array
+            // poi con [0] vado a prendere l'elemento nella posizione 0 dell'array e dato che con l'uso di slice é rimasto solo l'ultimo elemento allora viene preso quello
+        }
     },
 
     // prima che l'applicativo venga montato prendo uno degli hook per imposare il prima contatto attivo
     created() {
-        this.selectContact(this.contacts[0]);
-        // in questo modo il primo elemento active nella contact sections é Michele
+        this.selectContact(this.contacts[0],this.active);
+        // in questo modo il primo elemento active nella contact sections é Michele e líndice di default é 0
     }
 })

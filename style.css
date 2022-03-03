@@ -185,7 +185,7 @@ ul li{
     white-space: nowrap;
 }
 
-.last-message{
+.last-sent{
     font-size: 12px;
     color: var(--grey-text);
     align-self: flex-start;
