@@ -4,9 +4,8 @@ const app = new Vue ({
         searched: '',
         newText: '',
         activeContact: null,  // ci memorizzo contatto attivo
+        activeIndex: 0,
         searchText: '',
-
-        active: 0,
 
         contacts: [
             {
@@ -97,18 +96,17 @@ const app = new Vue ({
 
     methods: {
         selectContact: function (contact,index) {
-            this.active = index;
+            this.activeIndex = index;
             this.activeContact = contact;
-            console.log(this.activeContact,this.active);
+            console.log(this.activeContact,this.activeIndex);
         },
 
         getHour: function ( date ) {
             const hour = date.split(' ')[1]; //con split prendo l'elemento con posizione 1 dentro a date
             // The split() method divides a String into an ordered list of substrings, puts these substrings into an array, and returns the array.
 
-            return hour.substring(0,5);
+            return hour.substring(0,5); //escludo i secondi dalla stringa
             // The substring() method returns the part of the string between the start and end indexes, or to the end of the string.
-            //in questo modo riesco a escludere i secondi dalla stringa
         },
 
         getDate: function (date) {
@@ -161,6 +159,7 @@ const app = new Vue ({
             console.log(this.activeContact);
         },
 
+        
     },
 
     computed: {
@@ -169,12 +168,27 @@ const app = new Vue ({
             // If beginIndex is negative, slice() begins extraction from str.length + beginIndex.
             // con slice(-1) mi ritorna un array con dentro solo l'ultimo elemento dell'array
             // poi con [0] vado a prendere l'elemento nella posizione 0 dell'array e dato che con l'uso di slice é rimasto solo l'ultimo elemento allora viene preso quello
-        }
+        },
+
+        filteredContacts: function() {
+            // deve ritornarmi un array con dentro i nomi che vengono filtrati a seconda di quello che viene scritto in this.searchText, quindi:
+            // - prendo l'array di oggetti contacts e gli applico il metodo .filter --> The filter() method creates a new array with all elements that pass the test implemented by the provided function.
+            // - a filter devo passare un valore (io l'ho chiamto item) che è l'elemento corrente che deve essere filtrato e una funzione dentro cui specifico cosa deve essere filtrato
+            // - dentro la funzione devo prendere la proprietà name dell'elemento corrente, ovveri item.name, e gli appilico il metodo .match (The match() method retrieves the result of matching a string against a regular expression)
+            const filterResult = this.contacts.filter((item) => {
+                return item.name.toLowerCase().match(this.searchText.toLowerCase());
+                // it's important to notice that match is case sensitive.
+            })
+            console.log(filterResult);
+
+            return filterResult;
+        },
     },
 
     // prima che l'applicativo venga montato prendo uno degli hook per imposare il prima contatto attivo
     created() {
-        this.selectContact(this.contacts[0],this.active);
+        this.selectContact(this.contacts[0],this.activeIndex);
         // in questo modo il primo elemento active nella contact sections é Michele e líndice di default é 0
     }
 })
+

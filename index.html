@@ -61,9 +61,9 @@
                 </div>
 
                 <!-- chat preview -->
-                <div class="chat-preview" v-for="(contact, i) in contacts" @click="selectContact(contact,i)" :class="activeContact === contact ? 'active' : '' ">
-                 <!-- contact attivo viene aelezionato con il click che con la funzione rende this.activeContact = contact;
-                poi gli dico che se activeContact corrisponde a contact che é l'elemento corrente allora assegno la classe active -->
+                <div class="chat-preview" v-for="(contact, i) in filteredContacts" @click="selectContact(contact,i)" :class="activeContact === contact ? 'active' : '' ">
+                 <!-- il contact attivo viene selezionato con il click che con la funzione rende this.activeContact = contact; poi gli dico che se activeContact corrisponde a contact che é l'elemento corrente allora assegno la classe active -->
+                 <!-- v-for="(contact, i) in filteredContacts" il ciclo viene fatto dentro l'array in cui ci sono i nomi che vengono filtrati a seconda di quello che viene scritto in this.searchText-->
                     <div class="picture-wrapper">
                         <figure class="picture-container">
                             <img class="profile-picture" :src="contact.avatar" alt="">
@@ -79,6 +79,7 @@
                                 {{message.text}}
                             </div>
                         </div>
+
                         <div class="last-sent">
                             {{getHour(message.date)}}
                         </div>
