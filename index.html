@@ -25,7 +25,7 @@
                     <figure class="picture-smaller">
                         <img class="profile-picture" src="img/photo-1547407139-3c921a66005c.jpeg" alt="">
                     </figure>
-                    <div class="contact-name">Name</div>
+                    <div class="contact-name">Michela</div>
                 </div>
 
                 <ul class="icon-container">
@@ -70,21 +70,24 @@
                         </figure>
                     </div>
 
-                    <div class="preview-wrapper" v-for="(message, j) in contact.messages.slice(-1)">
-                        <div class="contact-preview">
-                            <div class="contact-name">
-                                {{contact.name}}
-                            </div>
-                            <div class="message-preview">
-                                {{message.text}}
-                            </div>
+                    <div class="preview-container">
+                        
+                        <div class="contact-name">
+                            {{contact.name}}
                         </div>
-
-                        <div class="last-sent">
-                            {{getHour(message.date)}}
+                        <div class="preview-wrapper" v-for="(message, i) in contact.messages.slice(-1)">
+                            <div class="contact-preview">
+                                <div class="message-preview">
+                                    {{message.text}}
+                                </div>
+                            </div>
+    
+                            <div class="last-sent" v-if="activeContact.length !== 0">
+                                {{getHour(message.date)}}
+                            </div>
+                            <div class="last-sent" v-else></div>
                         </div>
                     </div>
-                    
                 </div> <!-- fine chat-preview -->
             </div><!-- fine contacts-container -->
 
@@ -120,19 +123,27 @@
                         <i class="fa-solid fa-video"></i>
                     </li>
                     <li>
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                        <i class="fa-solid fa-ellipsis-vertical"></i> 
                     </li>
                 </ul>
             </div>
 
             <div class="chat-container">
                 <!-- devo prendere i messagi dentro al contatto attivo  -->
-                <div class="message" v-for="message in activeContact.messages" :class="message.status">
+                <div class="message" v-for="(message, i) in activeContact.messages" :class="message.status">
                     <div class="text" >
                         {{message.text}}
                     </div>
-                    <div class="date-time">
+                    <div class="date-time" v-if="activeContact.length !== 0">
                         {{getHour(message.date)}}
+                    </div>
+                    <div class="date-time" v-else></div>
+                    <div class="chevron-wrapper" v-on:mouseover="addZindex" @click="showOptions(i)">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div v-if="message.visible === true" class="message-options">
+                        <div class="delete-message" @click="deleteMessage(i)">Elimina Messaggio</div>
+                        <div class="message-info">Message info</div>
                     </div>
                 </div>
             </div>

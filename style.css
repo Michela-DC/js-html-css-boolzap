@@ -164,14 +164,21 @@ ul li{
     padding: 0 10px;
 }
 
+.preview-container{
+    border-bottom: 1px solid var(--border-color);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+}
+
 .preview-wrapper{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
-    height: 100%;
-    padding-right: 10px;
-    border-bottom: 1px solid var(--border-color);
 }
 
 .message-preview{
@@ -186,10 +193,12 @@ ul li{
 }
 
 .last-sent{
+    line-height: 100%;
     font-size: 12px;
     color: var(--grey-text);
-    align-self: flex-start;
-    padding-top: 15px;
+    position: absolute;
+    top: 20px;
+    right: 15px;
 }
 
 /* chat-section ------------------ */
@@ -230,6 +239,10 @@ ul li{
     /* invece di box-shadow: 0 2px 3px #aaa; uso fliter: drop-shadow cosí l'ombra va anche sul triangolino*/
     filter: drop-shadow(0px 2px 2px #aaa);
     position: relative;
+}
+
+.z-index{
+    z-index: 10;
 }
 
 /* element+element -> esempio div + p = Selects the first <p> element that is placed immediately after <div> elements */
@@ -289,6 +302,46 @@ ul li{
     align-self: flex-end;
     font-size: 12px;
     color: var(--grey-text);
+}
+
+.chevron-wrapper{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.fa-chevron-down{
+    visibility: hidden;
+}
+
+.chevron-wrapper:hover .fa-chevron-down{
+    visibility: visible;
+}
+
+.message-options{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    width: 150px;
+    height: 78px;
+    background-color: white;
+    padding:0 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px #aaa;
+    color: var(--grey-text);
+    cursor: pointer;
+}
+
+.sent > .message-options {
+    right: 10px;
+    top: 30px;
+}
+
+.received > .message-options {
+    left: 10px;
+    top: 30px;
 }
 
 .write-container{
