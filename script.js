@@ -248,8 +248,3 @@ const app = new Vue ({
         // in questo modo il primo elemento active nella contact sections é Michele e líndice di default é 0
     }
 })
-
-
-if (Array.length === 0) {
-
-}
