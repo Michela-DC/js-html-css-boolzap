@@ -318,6 +318,10 @@ ul li{
     visibility: visible;
 }
 
+.chevron-visible {
+    visibility: visible;
+}
+
 .message-options{
     position: absolute;
     display: flex;
@@ -340,7 +344,7 @@ ul li{
 }
 
 .received > .message-options {
-    left: 10px;
+    left: 78%;
     top: 30px;
 }
 

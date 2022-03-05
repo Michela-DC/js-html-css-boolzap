@@ -179,9 +179,6 @@ const app = new Vue ({
             item.target.parentNode.classList.add('z-index');
         },
 
-        removeZindex: function (item) {
-            item.target.parentNode.classList.remove('z-index');
-        },
 
         showOptions: function (index) {
             // quando clicco la prima volto sul chevron mi compare il div delle opzioni e al secondo click riscompare:
@@ -190,8 +187,8 @@ const app = new Vue ({
                 console.log(this.activeContact.messages[index].visible)
                 // se this.click é a zero lo incremento cosí per far funzionare il secondo click controllo se click é > 0 
                 this.click++;
-                // ritorna uguale a true il visible dentro al message nella posizione corrente del contatto attivo
                 return this.activeContact.messages[index].visible = true;
+                // ritorna uguale a true il visible dentro al message nella posizione corrente del contatto attivo
 
             } else{
                 console.log(this.activeContact.messages[index].visible)
@@ -204,8 +201,10 @@ const app = new Vue ({
             console.log(position);
             console.log(this.activeContact.messages);
 
-            this.activeContact.messages.splice(position,1);
             // Elimino il messaggio nella posizione corrente con The splice() method --> changes the contents of an array by removing or replacing existing elements and/or adding new elements in place
+            this.activeContact.messages.splice(position,1);
+            // devo decrementare il click perché se elimino il messaggio il chevron non viene riclicckato e this.click rimane a 1, quindi il chevron che vado a clicckare dopo sarebbe da clicckare due volte per far diventare il click 0 e visible true
+            this.click--;
         },
         
     },

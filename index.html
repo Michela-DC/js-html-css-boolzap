@@ -107,7 +107,7 @@
                             {{activeContact.name}}
                         </div>
                         <div class="last-seen">
-                            last seen {{getDate(lastSeen.date)}} {{getHour(lastSeen.date)}}
+                            {{getDate(lastSeen.date)}} {{getHour(lastSeen.date)}}
                         </div>
                     </div>
                 </div>
@@ -139,7 +139,11 @@
                     </div>
                     <div class="date-time" v-else></div>
                     <div class="chevron-wrapper" v-on:mouseover="addZindex" @click="showOptions(i)">
-                        <i class="fa-solid fa-chevron-down"></i>
+                        <!-- per fare in modo che il chevron rimanga visibile quando clicco e poi vado nelle opzioni: -->
+                        <!-- se message.visible === false allora si vede solo se ci vado sopra -->
+                        <i v-if="!message.visible" class="fa-solid fa-chevron-down"></i>
+                        <!-- se message.visible === true allora gli assegno la classe chevron-visible quindi rimane visibile anche se non ha l'hover -->
+                        <i v-else class="fa-solid fa-chevron-down chevron-visible"></i>
                     </div>
                     <div v-if="message.visible === true" class="message-options">
                         <div class="delete-message" @click="deleteMessage(i)">Elimina Messaggio</div>
