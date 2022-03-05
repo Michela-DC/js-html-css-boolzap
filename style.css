@@ -324,14 +324,10 @@ ul li{
 
 .message-options{
     position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 12px;
-    width: 150px;
-    height: 78px;
+    min-width: 155px;
+    height: 80px;
+    padding: 5px 0;
     background-color: white;
-    padding:0 10px;
     border-radius: 5px;
     box-shadow: 0 2px 3px #aaa;
     color: var(--grey-text);
@@ -346,6 +342,18 @@ ul li{
 .received > .message-options {
     left: 78%;
     top: 30px;
+}
+
+.delete-message, .message-info{
+    height: 50%;
+    width: 100%;
+    padding-left: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.delete-message:hover, .message-info:hover {
+    background-color: var(--bg-ligthGrey);
 }
 
 .write-container{
