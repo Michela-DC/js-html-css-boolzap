@@ -127,7 +127,7 @@ const app = new Vue ({
             }
         },
 
-        createMessage: function(text, status) {
+        createMessage: function(text, status, visible) {
             //creo una nuova data usando il costrutto js Date() --> Creates a JavaScript Date instance that represents a single moment in time in a platform-independent format.Date objects contain a Number that represents milliseconds since 1 January 1970 UTC.
             const newDate = new Date();
 
@@ -135,7 +135,8 @@ const app = new Vue ({
             let newMessage = {
                 text,
                 status,
-                date: `${newDate.getDate()}/${newDate.getMonth()+1}/${newDate.getFullYear()} ${newDate.getHours()}:${newDate.getMinutes()}:${newDate.getSeconds()}`,
+                visible,
+                date: `${newDate.getDate()}/${newDate.getMonth()+1}/${newDate.getFullYear()} ${newDate.getHours()}:${newDate.getMinutes()}`,
                 // getMonth inizia a contare i mesi da zero quindi gli devo aggiungere + 1 per vedere stampato il mese corretto
             }
             return newMessage;
@@ -146,7 +147,7 @@ const app = new Vue ({
             if(this.newText){ //è la stessa cosa di scrivere this.newText !== ''
                 console.log('la stringa non è vuota')
                 // per creare il nuovo messaggio richiamo la funzione createMessage e gli passo sent e this.newText come parametri
-                let message = this.createMessage(this.newText, 'sent');
+                let message = this.createMessage(this.newText, 'sent', 'false');
                 console.log(message);
 
                 // il nuovo messaggio lo devo pushare dentro contatto attivo che è un array di oggetti
@@ -164,6 +165,7 @@ const app = new Vue ({
             }
         },
 
+
         replyMessage: function() {
 
             let reply = this.createMessage('Ok', 'received');
@@ -176,9 +178,13 @@ const app = new Vue ({
         //funzione per quando vado in mouseover e su chevron-wrapper aggiungo al suo div padre la classe z-index
         addZindex: function (item) {
             // item.target si riferisce all'elemento su cui vado in over e .parentNode si riferisce al sui div padre
-            item.target.parentNode.classList.add('z-index');
+            item.target.classList.add('z-index');
         },
 
+        removeZindex: function (item) {
+            // item.target si riferisce all'elemento su cui vado in over e .parentNode si riferisce al sui div padre
+            item.target.classList.remove('z-index');
+        },
 
         showOptions: function (index) {
             // quando clicco la prima volto sul chevron mi compare il div delle opzioni e al secondo click riscompare:

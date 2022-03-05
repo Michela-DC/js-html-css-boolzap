@@ -130,7 +130,7 @@
 
             <div class="chat-container">
                 <!-- devo prendere i messagi dentro al contatto attivo  -->
-                <div class="message" v-for="(message, i) in activeContact.messages" :class="message.status">
+                <div class="message" v-for="(message, i) in activeContact.messages" :class="message.status" v-on:mouseover="addZindex" v-on:mouseleave="removeZindex">
                     <div class="text" >
                         {{message.text}}
                     </div>
@@ -138,20 +138,20 @@
                         {{getHour(message.date)}}
                     </div>
                     <div class="date-time" v-else></div>
-                    <div class="chevron-wrapper" v-on:mouseover="addZindex" @click="showOptions(i)">
+                    <div class="chevron-wrapper" @click="showOptions(i)">
                         <!-- per fare in modo che il chevron rimanga visibile quando clicco e poi vado nelle opzioni: -->
                         <!-- se message.visible === false allora si vede solo se ci vado sopra -->
                         <i v-if="!message.visible" class="fa-solid fa-chevron-down"></i>
                         <!-- se message.visible === true allora gli assegno la classe chevron-visible quindi rimane visibile anche se non ha l'hover -->
                         <i v-else class="fa-solid fa-chevron-down chevron-visible"></i>
                     </div>
-                    <div v-if="message.visible === true" class="message-options">
+                    <div v-if="message.visible === true" class="message-options" >
                         <div class="delete-message" @click="deleteMessage(i)">Elimina Messaggio</div>
                         <div class="message-info">Message info</div>
                     </div>
                 </div>
             </div>
-
+            
             <div class="write-container">
                 <i class="fa-regular fa-face-smile"></i>
                 <i class="fa-solid fa-paperclip"></i>

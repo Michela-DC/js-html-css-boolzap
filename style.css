@@ -238,7 +238,6 @@ ul li{
     gap: 20px;
     /* invece di box-shadow: 0 2px 3px #aaa; uso fliter: drop-shadow cosí l'ombra va anche sul triangolino*/
     filter: drop-shadow(0px 2px 2px #aaa);
-    position: relative;
 }
 
 .z-index{
@@ -311,7 +310,7 @@ ul li{
 }
 
 .fa-chevron-down{
-    visibility: hidden;
+    visibility: visible;
 }
 
 .chevron-wrapper:hover .fa-chevron-down{
@@ -324,6 +323,7 @@ ul li{
 
 .message-options{
     position: absolute;
+    z-index: 20;
     min-width: 155px;
     height: 80px;
     padding: 5px 0;
@@ -333,6 +333,7 @@ ul li{
     color: var(--grey-text);
     cursor: pointer;
 }
+
 
 .sent > .message-options {
     right: 10px;
